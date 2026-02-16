@@ -1,84 +1,39 @@
 # GitHub Actions - 自动编译APK
 #
-# 这个文件告诉GitHub：
-# 每当你推送代码到仓库时，自动在云端编译APK
-# 完全免费，无需安装任何软件！
-#
-# GitHub Actions是什么？
-# 它是GitHub提供的免费CI/CD服务，可以自动：
-# - 编译代码
-# - 运行测试
-# - 生成APK
-# - 发布到GitHub Releases
+# 使用最简单的方法
 
 name: 编译APK
 
-# 触发条件：
-# - 推送到main分支时触发
-# - 手动触发也可以
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
-# 定义工作流程
 jobs:
   build:
-    # 在Ubuntu最新版本上运行
-    # GitHub会提供一台虚拟机给我们用
     runs-on: ubuntu-latest
 
     steps:
-      # 步骤1：下载代码
-      # actions/checkout是GitHub官方的插件，用于克隆代码
       - name: 下载代码
         uses: actions/checkout@v4
 
-      # 步骤2：设置JDK
-      # Android编译需要Java开发工具包
       - name: 设置JDK
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      # 步骤3：设置Gradle和Android SDK
-      # 使用android-actions/setup-android自动设置Android SDK
-      - name: 设置Android SDK
-        uses: android-actions/setup-android@v3
-        with:
-          cmdline-tools-version: 11076708
-
-      # 步骤4：设置Gradle缓存
-      # 缓存依赖库，下次编译更快
-      - name: 设置Gradle缓存
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: '8.5'
-
-      # 步骤5：接受Android SDK许可证
-      - name: 接受SDK许可证
-        run: yes | sdkmanager --licenses || true
-
-      # 步骤6：编译APK（调试版本）
-      # assembleDebug是编译调试版本APK的命令
-      # 调试版本可以直接安装到手机上测试
       - name: 编译APK
-        run: gradle assembleDebug
+        uses: eskatos/gradle-command-action@v3
+        with:
+          gradle-version: 8.5
+          arguments: assembleDebug
 
-      # 步骤7：上传APK作为产物
-      # 编译好的APK会被保存下来，你可以下载
       - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
           name: ScreenRecord-APK
           path: app/build/outputs/apk/debug/*.apk
-          # APK保留90天
           retention-days: 90
-
-      # 步骤8：显示编译结果
-      - name: 编译完成
-        run: echo "✅ APK编译成功！"
-        shell: bash
