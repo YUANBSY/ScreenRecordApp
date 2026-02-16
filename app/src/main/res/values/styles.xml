@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    styles.xml - 样式资源文件
+    
+    样式是一组属性的集合，可以应用到界面元素上
+    这样可以避免重复设置相同的属性，保持界面风格一致
+-->
+<resources>
+    <!-- 
+        应用主题样式
+        NoActionBar表示不显示标题栏，让界面更简洁
+    -->
+    <style name="Theme.ScreenRecord" parent="Theme.AppCompat.NoActionBar">
+        <!-- 主色调 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- 状态栏颜色（手机顶部显示时间的区域） -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!-- 强调色 -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- 背景色 -->
+        <item name="android:windowBackground">@color/background</item>
+        <!-- 状态栏文字颜色为白色 -->
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

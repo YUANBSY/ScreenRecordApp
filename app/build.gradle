@@ -1,0 +1,93 @@
+// build.gradle (模块级) - app模块的构建配置
+//
+// 这个文件配置app模块的具体构建设置
+// 包括编译SDK版本、应用ID、依赖库等
+
+plugins {
+    // 应用Android应用插件
+    id 'com.android.application'
+}
+
+android {
+    // 命名空间：应用的包名
+    // 用于生成R资源文件的包名
+    namespace 'com.example.screenrecord'
+
+    // 编译SDK版本：使用哪个版本的Android API进行编译
+    // compileSdk 34 表示使用Android 14的API
+    compileSdk 34
+
+    // 默认配置
+    defaultConfig {
+        // 应用ID：应用在设备上的唯一标识
+        // 类似于身份证号，每个应用都不同
+        applicationId "com.example.screenrecord"
+
+        // 最低SDK版本：应用支持的最低Android版本
+        // minSdk 24 表示只支持Android 7.0及以上
+        // Camera2 API需要Android 5.0+，但前台服务类型需要Android 10+
+        minSdk 24
+
+        // 目标SDK版本：应用针对哪个Android版本优化
+        // targetSdk 34 表示针对Android 14优化
+        targetSdk 34
+
+        // 版本号：用于Google Play判断版本更新
+        versionCode 1
+
+        // 版本名：用户看到的版本号
+        versionName "1.0"
+
+        // 测试运行器
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // 构建类型配置
+    buildTypes {
+        // 发布版本
+        release {
+            // 是否启用代码混淆
+            // 混淆可以减小APK体积，保护代码
+            minifyEnabled false
+
+            // 混淆配置文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        
+        // 调试版本
+        debug {
+            // 调试版本不混淆
+            minifyEnabled false
+            // 调试版本添加调试后缀
+            applicationIdSuffix ".debug"
+        }
+    }
+
+    // Java编译选项
+    compileOptions {
+        // Java源代码兼容版本
+        sourceCompatibility JavaVersion.VERSION_1_8
+        // Java目标版本
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+// 依赖配置
+// 这些是应用需要的外部库
+dependencies {
+    // AndroidX核心库：提供向后兼容的API
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    
+    // Material Design组件库：提供Material Design风格的UI组件
+    implementation 'com.google.android.material:material:1.10.0'
+    
+    // ConstraintLayout：灵活的布局库
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // 单元测试库
+    testImplementation 'junit:junit:4.13.2'
+    
+    // Android仪器测试库
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    record_icon.xml - 录像图标
+    
+    这是一个红色圆形图标，模拟摄像机的录像指示灯
+    使用vector定义，可以无损缩放
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    
+    <!-- 红色圆形 - 录像指示灯样式 -->
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M12,12m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+</vector>

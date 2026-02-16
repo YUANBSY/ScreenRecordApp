@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_main.xml - 主界面布局文件
+    
+    这个文件定义了应用界面的外观：
+    - 一个大的录像按钮（点击开始/停止录像）
+    - 状态文本显示当前录像状态
+    - 使用简洁的深色主题，方便在暗光环境下使用
+    
+    RelativeLayout是一种布局方式，让元素可以相对于屏幕或其他元素定位
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A1A2E"
+    tools:context=".MainActivity">
+
+    <!-- 
+        标题文本 - 显示应用名称
+        textSize: 文字大小，单位sp（可根据用户字体设置缩放）
+        textColor: 文字颜色，白色
+        layout_centerHorizontal: 水平居中
+    -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="熄屏录像"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <!-- 
+        状态文本 - 显示当前录像状态
+        例如："准备就绪"、"正在录像..."、"录像已保存"
+    -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="准备就绪"
+        android:textColor="#AAAAAA"
+        android:textSize="18sp" />
+
+    <!-- 
+        录像时间显示 - 显示已录像的时长
+        格式为 "00:00:00"（时:分:秒）
+    -->
+    <TextView
+        android:id="@+id/timerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statusText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="00:00:00"
+        android:textColor="#FF6B6B"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <!-- 
+        录像按钮 - 主要操作按钮
+        这是一个圆形按钮，点击开始或停止录像
+        未录像时显示红色圆圈（录像图标）
+        录像中显示红色方块（停止图标）
+    -->
+    <ImageButton
+        android:id="@+id/recordButton"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/record_button_bg"
+        android:contentDescription="录像按钮"
+        android:padding="30dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/record_icon" />
+
+    <!-- 
+        提示文本 - 显示使用说明
+        告诉用户如何使用这个应用
+    -->
+    <TextView
+        android:id="@+id/hintText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recordButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="点击按钮开始录像\n熄屏后录像将继续进行"
+        android:textColor="#666666"
+        android:textSize="14sp" />
+
+    <!-- 
+        视频保存路径提示
+        显示视频保存的位置
+    -->
+    <TextView
+        android:id="@+id/pathText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:text="视频将保存到：\n/Movies/ScreenRecord/"
+        android:textColor="#444444"
+        android:textSize="12sp" />
+
+</RelativeLayout>

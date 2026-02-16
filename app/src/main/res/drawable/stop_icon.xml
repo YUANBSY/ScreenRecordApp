@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    stop_icon.xml - 停止图标
+    
+    这是一个红色方形图标，用于录像中显示
+    点击可以停止录像
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    
+    <!-- 红色方形 - 停止按钮样式 -->
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M6,6h12v12h-12z" />
+</vector>

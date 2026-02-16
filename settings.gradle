@@ -1,0 +1,41 @@
+// settings.gradle - Gradle项目设置文件
+//
+// 这个文件告诉Gradle构建系统：
+// 1. 项目包含哪些模块
+// 2. 项目名称是什么
+// 3. 从哪里下载依赖库
+//
+// Gradle是什么？
+// Gradle是Android官方的构建工具，用于：
+// - 编译Java/Kotlin代码
+// - 打包资源文件
+// - 生成APK安装包
+// - 管理依赖库
+
+// 插件管理配置
+pluginManagement {
+    repositories {
+        // 使用阿里云镜像，加速下载
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    }
+}
+
+// 依赖管理配置
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        // 使用阿里云镜像，加速下载
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+    }
+}
+
+// 定义项目名称
+rootProject.name = "ScreenRecordApp"
+
+// 包含app模块
+// 一个Android项目可以包含多个模块
+// 例如：app模块（主应用）、library模块（共享库）
+include ':app'

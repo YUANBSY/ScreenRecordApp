@@ -1,0 +1,76 @@
+# GitHub Actions - 自动编译APK
+#
+# 这个文件告诉GitHub：
+# 每当你推送代码到仓库时，自动在云端编译APK
+# 完全免费，无需安装任何软件！
+#
+# GitHub Actions是什么？
+# 它是GitHub提供的免费CI/CD服务，可以自动：
+# - 编译代码
+# - 运行测试
+# - 生成APK
+# - 发布到GitHub Releases
+
+name: 编译APK
+
+# 触发条件：
+# - 推送到main分支时触发
+# - 手动触发也可以
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:  # 允许手动触发
+
+# 定义工作流程
+jobs:
+  build:
+    # 在Ubuntu最新版本上运行
+    # GitHub会提供一台虚拟机给我们用
+    runs-on: ubuntu-latest
+
+    steps:
+      # 步骤1：下载代码
+      # actions/checkout是GitHub官方的插件，用于克隆代码
+      - name: 下载代码
+        uses: actions/checkout@v4
+
+      # 步骤2：设置JDK
+      # Android编译需要Java开发工具包
+      - name: 设置JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 步骤3：设置Gradle缓存
+      # 缓存依赖库，下次编译更快
+      - name: 设置Gradle缓存
+        uses: gradle/actions/setup-gradle@v3
+
+      # 步骤4：给gradlew执行权限
+      # Linux需要给脚本执行权限
+      - name: 给Gradle脚本执行权限
+        run: chmod +x gradlew
+
+      # 步骤5：编译APK（调试版本）
+      # assembleDebug是编译调试版本APK的命令
+      # 调试版本可以直接安装到手机上测试
+      - name: 编译APK
+        run: ./gradlew assembleDebug
+
+      # 步骤6：上传APK作为产物
+      # 编译好的APK会被保存下来，你可以下载
+      - name: 上传APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ScreenRecord-APK
+          path: app/build/outputs/apk/debug/*.apk
+          # APK保留90天
+          retention-days: 90
+
+      # 步骤7：显示编译结果
+      - name: 编译完成
+        run: echo "✅ APK编译成功！"
+        shell: bash

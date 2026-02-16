@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    record_button_bg.xml - 录像按钮背景
+    
+    这是一个圆形按钮背景，使用shape定义
+    solid: 填充颜色
+    corners: 圆角（设置很大值使其变成圆形）
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    
+    <!-- 按钮填充颜色 - 深灰色背景 -->
+    <solid android:color="#2D2D44" />
+    
+    <!-- 边框 - 红色边框，宽度2dp -->
+    <stroke
+        android:width="4dp"
+        android:color="#FF6B6B" />
+    
+    <!-- 尺寸 - 确保是正方形才能变成圆形 -->
+    <size
+        android:width="120dp"
+        android:height="120dp" />
+</shape>

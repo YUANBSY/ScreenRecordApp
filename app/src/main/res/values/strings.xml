@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    strings.xml - 字符串资源文件
+    
+    将所有文字集中管理的好处：
+    1. 方便修改文字内容，不用改代码
+    2. 方便多语言翻译（如英文版、中文版）
+    3. 保持代码整洁
+-->
+<resources>
+    <!-- 应用名称 -->
+    <string name="app_name">熄屏录像</string>
+    
+    <!-- 通知相关文字 -->
+    <string name="notification_channel_name">录像服务</string>
+    <string name="notification_channel_desc">熄屏录像后台服务通知</string>
+    <string name="notification_title">正在录像</string>
+    <string name="notification_content">点击返回应用</string>
+    
+    <!-- 状态文字 -->
+    <string name="status_ready">准备就绪</string>
+    <string name="status_recording">正在录像...</string>
+    <string name="status_saving">正在保存视频...</string>
+    <string name="status_saved">录像已保存</string>
+    
+    <!-- 提示文字 -->
+    <string name="hint_start">点击按钮开始录像</string>
+    <string name="hint_stop">点击按钮停止录像</string>
+    
+    <!-- 错误提示 -->
+    <string name="error_permission">请授予相机和录音权限</string>
+    <string name="error_camera">无法打开相机</string>
+    <string name="error_record">录像启动失败</string>
+</resources>

@@ -1,0 +1,17 @@
+// build.gradle (项目级) - 整个项目的构建配置
+//
+// 这个文件配置整个项目的构建设置
+// 包括Gradle插件版本、仓库地址等
+
+// 使用plugins块声明插件
+plugins {
+    // Android应用插件，使用8.2.2版本
+    // 这个版本与Gradle 8.5兼容
+    id 'com.android.application' version '8.2.2' apply false
+}
+
+// 清理任务：删除build目录
+// 执行gradle clean时会运行这个任务
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
