@@ -44,23 +44,31 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # 步骤3：设置Gradle缓存
+      # 步骤3：设置Gradle和Android SDK
+      # 使用android-actions/setup-android自动设置Android SDK
+      - name: 设置Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: 11076708
+
+      # 步骤4：设置Gradle缓存
       # 缓存依赖库，下次编译更快
       - name: 设置Gradle缓存
         uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.5'
 
-      # 步骤4：给gradlew执行权限
-      # Linux需要给脚本执行权限
-      - name: 给Gradle脚本执行权限
-        run: chmod +x gradlew
+      # 步骤5：接受Android SDK许可证
+      - name: 接受SDK许可证
+        run: yes | sdkmanager --licenses || true
 
-      # 步骤5：编译APK（调试版本）
+      # 步骤6：编译APK（调试版本）
       # assembleDebug是编译调试版本APK的命令
       # 调试版本可以直接安装到手机上测试
       - name: 编译APK
-        run: ./gradlew assembleDebug
+        run: gradle assembleDebug
 
-      # 步骤6：上传APK作为产物
+      # 步骤7：上传APK作为产物
       # 编译好的APK会被保存下来，你可以下载
       - name: 上传APK
         uses: actions/upload-artifact@v4
@@ -70,7 +78,7 @@ jobs:
           # APK保留90天
           retention-days: 90
 
-      # 步骤7：显示编译结果
+      # 步骤8：显示编译结果
       - name: 编译完成
         run: echo "✅ APK编译成功！"
         shell: bash
